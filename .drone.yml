@@ -1,0 +1,25 @@
+kind: pipeline
+type: kubernetes
+name: default
+
+steps:
+  - name: build-push
+    image: docker:dind
+    volumes:
+      - name: dockersock
+        path: /run
+    environment:
+      DOCKER_USER:
+        from_secret: DOCKER_USER
+      DOCKER_PASSWORD:
+        from_secret: DOCKER_PASSWORD
+      IMAGE: adamhancock/mysql-backup-to-azure
+    commands:
+      - sleep 5 #
+      - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - docker build . -t $DOCKER_USER/$IMAGE
+      - docker push $DOCKER_USER/$IMAGE
+volumes:
+  - name: dockersock
+    host:
+      path: /run

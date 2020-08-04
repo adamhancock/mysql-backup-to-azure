@@ -1,0 +1,12 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: backup-mysql
+spec:
+  template:
+    spec:
+      containers:
+        - name: mysql-backup-azure
+          image: adamhancock/mysql-backup-to-azure
+      restartPolicy: Never
+  backoffLimit: 4
