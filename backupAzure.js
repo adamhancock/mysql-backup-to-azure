@@ -4,7 +4,11 @@ const {
 } = require('@azure/storage-blob')
 module.exports = async function (blobName, content) {
   // Enter your storage account name and shared key
-  const { account, accountKey, containerName } = require('./config.json').azure
+  const {
+    account,
+    accountKey,
+    containerName
+  } = require('./config/config.json').azure
 
   // Use StorageSharedKeyCredential with storage account and account key
   // StorageSharedKeyCredential is only available in Node.js runtime, not in browsers

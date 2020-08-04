@@ -1,0 +1,12 @@
+{
+  "mysql": {
+    "host": "mysql",
+    "user": "root",
+    "password": ""
+  },
+  "azure": {
+    "account": "",
+    "accountKey": "",
+    "containerName": "backup"
+  }
+}

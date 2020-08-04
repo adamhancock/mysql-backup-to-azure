@@ -1,12 +1,24 @@
-apiVersion: batch/v1
-kind: Job
+apiVersion: batch/v1beta1
+kind: CronJob
 metadata:
-  name: backup-mysql
+  name: mysql-backup-to-azure
 spec:
-  template:
+  schedule: "* * * * *"
+  jobTemplate:
     spec:
-      containers:
-        - name: mysql-backup-azure
-          image: adamhancock/mysql-backup-to-azure
-      restartPolicy: Never
-  backoffLimit: 4
+      template:
+        spec:
+          containers:
+            - name: mysql-backup-azure
+              image: adamhancock/mysql-backup-to-azure
+              volumeMounts:
+                - name: config-volume
+                  mountPath: /usr/src/app/config
+          volumes:
+            - name: config-volume
+              configMap:
+                # Provide the name of the ConfigMap containing the files you want
+                # to add to the container
+                name: mysql-backup-to-azure-cm
+          restartPolicy: Never
+      backoffLimit: 4
