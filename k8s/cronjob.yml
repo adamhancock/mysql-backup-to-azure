@@ -2,8 +2,12 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: mysql-backup-to-azure
+  labels:
+    app: mysql-backup
 spec:
-  schedule: "* * * * *"
+  schedule: "0 0 * * *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
   jobTemplate:
     spec:
       template:
