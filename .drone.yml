@@ -13,7 +13,7 @@ steps:
         from_secret: DOCKER_USER
       DOCKER_PASSWORD:
         from_secret: DOCKER_PASSWORD
-      IMAGE: adamhancock/mysql-backup-to-azure
+      IMAGE: mysql-backup-to-azure
     commands:
       - sleep 5 #
       - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
