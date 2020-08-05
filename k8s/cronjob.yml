@@ -19,17 +19,17 @@ spec:
                 - name: mysql_host
                   valueFrom:
                     secretKeyRef:
-                      name: mysql
+                      name: mysql-backup
                       key: host
                 - name: mysql_user
                   valueFrom:
                     secretKeyRef:
-                      name: mysql
+                      name: mysql-backup
                       key: user
                 - name: mysql_password
                   valueFrom:
                     secretKeyRef:
-                      name: mysql
+                      name: mysql-backup
                       key: password
                 - name: azure_account
                   valueFrom:

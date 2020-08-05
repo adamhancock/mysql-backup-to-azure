@@ -5,7 +5,9 @@ const backupMySQL = require('./backupMySQL')
 ;(async function () {
   const databases = await listDatabases()
   for await (const db of databases) {
-    const fileName = `${moment().format('DD-MM-YY')}/${db}.sql`
+    const fileName = `${moment().format('DD-MM-YY')}/${db}-${moment().format(
+      'HH-mm'
+    )}.sql`
     console.log(`Backing up ${db}`)
     const content = await backupMySQL(db)
 
