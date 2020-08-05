@@ -5,7 +5,7 @@ metadata:
   labels:
     app: mysql-backup
 spec:
-  schedule: '* * * * *'
+  schedule: '0 0 * * *'
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 1
   jobTemplate:
