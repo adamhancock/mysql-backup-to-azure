@@ -4,7 +4,7 @@ module.exports = async function (database) {
     return await mysqldump({
       connection: {
         database: database,
-        ...require('./config/config.json').mysql
+        ...require('./config/config.js').mysql
       }
     })
   } catch (e) {

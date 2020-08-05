@@ -8,7 +8,7 @@ module.exports = async function (blobName, content) {
     account,
     accountKey,
     containerName
-  } = require('./config/config.json').azure
+  } = require('./config/config.js').azure
 
   // Use StorageSharedKeyCredential with storage account and account key
   // StorageSharedKeyCredential is only available in Node.js runtime, not in browsers

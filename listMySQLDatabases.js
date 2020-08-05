@@ -1,7 +1,7 @@
 module.exports = async function () {
   const { Pool, Client } = require('@mysql.js/mysql')
 
-  const client = new Client(require('./config/config.json').mysql)
+  const client = new Client({ ...require('./config/config.js').mysql })
   const { results, fields } = await client.query('show databases')
   await client.end()
 
