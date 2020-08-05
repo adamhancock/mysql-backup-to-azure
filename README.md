@@ -1,5 +1,10 @@
 Docker container to run as a job and backup MySQL databases to Azure Blob Storage.
 
+# To deploy on Kubernetes
+
+- Copy YAML: https://github.com/adamhancock/mysql-backup-to-azure/tree/master/k8s
+- Replace values in secrets.yaml.example with your MySQL host and Azure Blob storage details.
+
 # Environment Variables
 
 - mysql_host=
