@@ -5,7 +5,7 @@ metadata:
   labels:
     app: mysql-backup
 spec:
-  schedule: "0 0 * * *"
+  schedule: '* * * * *'
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 1
   jobTemplate:
@@ -15,14 +15,37 @@ spec:
           containers:
             - name: mysql-backup-azure
               image: adamhancock/mysql-backup-to-azure
-              volumeMounts:
-                - name: config-volume
-                  mountPath: /usr/src/app/config
-          volumes:
-            - name: config-volume
-              configMap:
-                # Provide the name of the ConfigMap containing the files you want
-                # to add to the container
-                name: mysql-backup-to-azure-cm
+              env:
+                - name: mysql_host
+                  valueFrom:
+                    secretKeyRef:
+                      name: mysql
+                      key: host
+                - name: mysql_user
+                  valueFrom:
+                    secretKeyRef:
+                      name: mysql
+                      key: user
+                - name: mysql_password
+                  valueFrom:
+                    secretKeyRef:
+                      name: mysql
+                      key: password
+                - name: azure_account
+                  valueFrom:
+                    secretKeyRef:
+                      name: azure
+                      key: account
+                - name: azure_accountKey
+                  valueFrom:
+                    secretKeyRef:
+                      name: azure
+                      key: accountKey
+                - name: azure_container
+                  valueFrom:
+                    secretKeyRef:
+                      name: azure
+                      key: container
+
           restartPolicy: Never
       backoffLimit: 4
