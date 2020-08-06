@@ -1,5 +1,7 @@
 Docker container to backup MySQL databases direct to Azure Blob Storage.
 
+Blog: https://blog.adamhancock.co.uk/backing-up-mysql-to-azure/
+
 # Run with docker
 
 Run the below command as a cronjob with your desired backup interval. Update the environment variables to your server details.
