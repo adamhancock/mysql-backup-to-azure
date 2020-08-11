@@ -19,7 +19,7 @@ const backupMySQL = require('./backupMySQL')
       // Backup to azure
       await backupToAzure(
         fileName,
-        `${content.dump.schema} \n ${content.dump.data}`
+        `${content.dump.schema}\n${content.dump.data}`
       )
     }
   }
