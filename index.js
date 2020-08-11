@@ -17,7 +17,10 @@ const backupMySQL = require('./backupMySQL')
     // check MySQL dump is not empty
     if (content != undefined) {
       // Backup to azure
-      await backupToAzure(fileName, content.dump.data)
+      await backupToAzure(
+        fileName,
+        `${content.dump.schema} \n ${content.dump.data}`
+      )
     }
   }
 })()
