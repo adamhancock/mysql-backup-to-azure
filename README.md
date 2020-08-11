@@ -23,8 +23,10 @@ Run the below command as a cronjob with your desired backup interval. Update the
 - azure_accountKey=
 - azure_container=backup
 
-Container needs to be created via Azure Storage Explorer manually.
+The destination container needs to be created via Azure Storage Explorer manually.
 
 Backups will be stored in a folder named with the date. Backups are created with the time appended to the database name, for example 05-08-20/database_11-33.sql
+
+The backup file format will be the database schema followed by the data.
 
 Recommended to use Azure Lifecycles on blob to manage the retention of your backups: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-lifecycle-management-concepts?tabs=azure-portal
