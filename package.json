@@ -5,6 +5,7 @@
   "main": "test.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node index.js",
     "start": "NODE_ENV=production node index.js"
   },
   "author": "Adam Hancock",
@@ -12,6 +13,7 @@
   "dependencies": {
     "@azure/storage-blob": "^12.2.0-preview.1",
     "@mysql.js/mysql": "^0.8.0",
+    "async-gzip-gunzip": "^1.0.2",
     "dotenv": "^8.2.0",
     "moment": "^2.27.0",
     "mysql": "^2.18.1",

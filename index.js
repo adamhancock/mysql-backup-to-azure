@@ -2,25 +2,34 @@ const backupToAzure = require('./backupAzure')
 const listDatabases = require('./listMySQLDatabases')
 const moment = require('moment')
 const backupMySQL = require('./backupMySQL')
+const asyncGzip = require('async-gzip-gunzip').asyncGzip
+const config = require('./config/config')
+
 ;(async function () {
   // Build array of database names.
   const databases = await listDatabases()
 
   // for each database
   for await (const db of databases) {
-    const fileName = `${moment().format('DD-MM-YY')}/${db}_${moment().format(
+    let fileName = `${moment().format('DD-MM-YY')}/${db}_${moment().format(
       'HH-mm'
     )}.sql`
-    console.log(`Backing up ${db}`)
+    console.log(`Backing up ${db}...`)
+    let content
     // backup database
-    const content = await backupMySQL(db)
+    content = await backupMySQL(db)
     // check MySQL dump is not empty
     if (content != undefined) {
+      content = `${content.dump.schema}\n${content.dump.data}`
+
+      // compress the string
+      if (config.mysqlOptions.compress) {
+        console.log(`Compressing ${db}...`)
+        content = await asyncGzip(content)
+        fileName = fileName.concat('.gz')
+      }
       // Backup to azure
-      await backupToAzure(
-        fileName,
-        `${content.dump.schema}\n${content.dump.data}`
-      )
+      await backupToAzure(fileName, content)
     }
   }
 })()
