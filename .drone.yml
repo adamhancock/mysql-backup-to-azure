@@ -13,12 +13,12 @@ steps:
         from_secret: DOCKER_USER
       DOCKER_PASSWORD:
         from_secret: DOCKER_PASSWORD
-      IMAGE: mysql-backup-to-azure:develop
+      IMAGE: mysql-backup-to-azure
     commands:
       - sleep 5 #
       - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-      - docker build . -t $DOCKER_USER/$IMAGE
-      - docker push $DOCKER_USER/$IMAGE
+      - docker build . -t $DOCKER_USER/$IMAGE:develop
+      - docker push $DOCKER_USER/$IMAGE:develop
 volumes:
   - name: dockersock
     host:
@@ -39,12 +39,12 @@ steps:
         from_secret: DOCKER_USER
       DOCKER_PASSWORD:
         from_secret: DOCKER_PASSWORD
-      IMAGE: mysql-backup-to-azure:latest
+      IMAGE: mysql-backup-to-azure
     commands:
-      - sleep 5 #
-      - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-      - docker build . -t $DOCKER_USER/$IMAGE
-      - docker push $DOCKER_USER/$IMAGE
+    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - docker tag -t $DOCKER_USER/$IMAGE:$DRONE_COMMIT_SHA $DOCKER_USER/$IMAGE_NAME:latest
+    - docker push $DEST_DOCKER_REGISTRY/$IMAGE_NAME
+
 volumes:
   - name: dockersock
     host:
