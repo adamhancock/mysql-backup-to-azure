@@ -41,8 +41,8 @@ steps:
       IMAGE: mysql-backup-to-azure
     commands:
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-    - docker tag $DOCKER_USER/$IMAGE:$DRONE_COMMIT_SHA $DOCKER_USER/$IMAGE_NAME:latest
-    - docker push $DOCKER_USER/$IMAGE_NAME
+    - docker tag $DOCKER_USER/$IMAGE:$DRONE_COMMIT_SHA $DOCKER_USER/$IMAGE:latest
+    - docker push $DOCKER_USER/$IMAGE
 
 volumes:
   - name: dockersock
