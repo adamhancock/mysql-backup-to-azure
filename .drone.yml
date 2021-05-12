@@ -23,6 +23,14 @@ volumes:
   - name: dockersock
     host:
       path: /run
+trigger:
+  branch:
+    - master
+  event:
+    - push
+    - custom
+
+
 ---
 kind: pipeline
 type: kubernetes
