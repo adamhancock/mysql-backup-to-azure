@@ -1,6 +1,6 @@
 kind: pipeline
 type: kubernetes
-name: default
+name: develop
 
 steps:
   - name: build-push
@@ -49,3 +49,8 @@ volumes:
   - name: dockersock
     host:
       path: /run
+trigger:
+  event:
+    - promote
+  target:
+    - production
