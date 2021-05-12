@@ -1,7 +1,6 @@
 kind: pipeline
 type: kubernetes
 name: develop
-
 steps:
   - name: build-push
     image: docker:dind
@@ -23,11 +22,6 @@ volumes:
   - name: dockersock
     host:
       path: /run
-trigger:
-  branch:
-    - master
-  event:
-    - push
 ---
 kind: pipeline
 type: kubernetes
