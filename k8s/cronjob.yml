@@ -14,7 +14,7 @@ spec:
         spec:
           containers:
             - name: mysql-backup-azure
-              image: adamhancock/mysql-backup-to-azure
+              image: adamhancock/mysql-backup-to-azure:develop
               env:
                 - name: mysql_host
                   valueFrom:
@@ -31,6 +31,8 @@ spec:
                     secretKeyRef:
                       name: mysql-backup
                       key: password
+                - name: mysql_compress
+                  value: "true"
                 - name: azure_account
                   valueFrom:
                     secretKeyRef:

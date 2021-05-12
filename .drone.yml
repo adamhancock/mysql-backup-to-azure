@@ -42,7 +42,7 @@ steps:
     commands:
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - docker tag -t $DOCKER_USER/$IMAGE:$DRONE_COMMIT_SHA $DOCKER_USER/$IMAGE_NAME:latest
-    - docker push $DEST_DOCKER_REGISTRY/$IMAGE_NAME
+    - docker push $DOCKER_USER/$IMAGE_NAME
 
 volumes:
   - name: dockersock
