@@ -32,7 +32,20 @@ spec:
                       name: mysql-backup
                       key: password
                 - name: mysql_compress
-                  value: "true"
+                  valueFrom:
+                    secretKeyRef:
+                      name: mysql-backup
+                      key: compress
+                - name: mysql_encrypt
+                  valueFrom:
+                    secretKeyRef:
+                      name: mysql-backup
+                      key: encrypt
+                - name: mysql_encryptKey
+                  valueFrom:
+                    secretKeyRef:
+                      name: mysql-backup
+                      key: encryptKey
                 - name: azure_account
                   valueFrom:
                     secretKeyRef:

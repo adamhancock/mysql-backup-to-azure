@@ -10,6 +10,8 @@ module.exports = {
   },
   mysqlOptions: {
     compress: process.env.mysql_compress,
+    encrypt: process.env.mysql_encrypt,
+    encryptKey: process.env.mysql_encryptKey,
   },
   azure: {
     account: process.env.azure_account,

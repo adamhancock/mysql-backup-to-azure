@@ -4,6 +4,7 @@ const moment = require('moment')
 const backupMySQL = require('./backupMySQL')
 const asyncGzip = require('async-gzip-gunzip').asyncGzip
 const config = require('./config/config')
+const Cryptr = require('cryptr')
 
 ;(async function () {
   // Build array of database names.
@@ -27,6 +28,13 @@ const config = require('./config/config')
         console.log(`Compressing ${db}...`)
         content = await asyncGzip(content)
         fileName = fileName.concat('.gz')
+      }
+
+      if (config.mysqlOptions.encrypt) {
+        const cryptr = new Cryptr(config.mysqlOptions.encryptKey)
+        console.log(`Encrypting ${db}...`)
+        content = await cryptr.encrypt(content)
+        fileName = fileName.concat('.enc')
       }
       // Backup to azure
       await backupToAzure(fileName, content)
