@@ -13,6 +13,27 @@ Blog: https://blog.adamhancock.co.uk/backing-up-mysql-to-azure/
 Use ```docker-compose build``` to build the image locally and ```docker-compose up``` to run it. modify the ```docker-compose.yml``` file with your parameters.
 Note, you can override ```network_mode``` if you want to connect to other containers, just remove this and change the mysql_host with the docker container hostname.
 
+# docker-compose.yaml
+```
+version: '3.2'
+
+services:
+  mysql-to-azure-backup:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    network_mode: host
+    environment:
+      - mysql_host=localhost
+      - mysql_port=3306
+      - mysql_user=root
+      - mysql_password=changeme
+      - azure_account=
+      - azure_accountKey=
+      - azure_container=existing_backup_container
+```
+
+
 # Run with docker using pre-build image
 
 Run the below command as a cronjob with your desired backup interval. Update the environment variables to your server details.
