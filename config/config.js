@@ -18,5 +18,6 @@ module.exports = {
     account: process.env.azure_account         || '' ,
     accountKey: process.env.azure_accountKey   || '',
     containerName: process.env.azure_container || '',
+    backupfilePrefix: process.env.azure_backupfileprefix || '', 
   },
 }

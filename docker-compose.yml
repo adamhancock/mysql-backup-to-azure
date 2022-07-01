@@ -5,6 +5,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: .
+    image: mysql-to-azure-backup:latest
     network_mode: host
     environment:
       - mysql_host=localhost
