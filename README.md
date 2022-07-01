@@ -1,8 +1,19 @@
+This is a Fork of https://github.com/adamhancock/mysql-backup-to-azure to provide some more configuration options in the script.
+- Added mysql_port configuration
+- Added default Docker values for environment variables
+- Added docker-compose file for ease of building and running
+- Added build script
+
 Docker container to backup MySQL databases direct to Azure Blob Storage.
 
 Blog: https://blog.adamhancock.co.uk/backing-up-mysql-to-azure/
 
-# Run with docker
+# Build & run
+
+Use ```docker-compose build``` to build the image locally and ```docker-compose up``` to run it. modify the ```docker-compose.yml``` file with your parameters.
+Note, you can override ```network_mode``` if you want to connect to other containers, just remove this and change the mysql_host with the docker container hostname.
+
+# Run with docker using pre-build image
 
 Run the below command as a cronjob with your desired backup interval. Update the environment variables to your server details.
 
