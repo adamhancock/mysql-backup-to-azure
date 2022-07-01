@@ -3,6 +3,7 @@ This is a Fork of https://github.com/adamhancock/mysql-backup-to-azure to provid
 - Added default Docker values for environment variables
 - Added docker-compose file for ease of building and running
 - Added build script
+- Added backupfilePrefix (allowing you to set a file prefix to the backups). Usefull if backing up multiple hosts.
 
 Docker container to backup MySQL databases direct to Azure Blob Storage.
 
