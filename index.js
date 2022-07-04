@@ -12,7 +12,7 @@ const Cryptr = require('cryptr')
 
   // for each database
   for await (const db of databases) {
-    let fileName = `${moment().format('DD-MM-YY')}/${db}_${moment().format(
+    let fileName = `${moment().format('DD-MM-YY')}/${config.azure.backupfilePrefix}${db}_${moment().format(
       'HH-mm'
     )}.sql`
     console.log(`Backing up ${db}...`)

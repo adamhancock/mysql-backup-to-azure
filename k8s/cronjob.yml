@@ -5,22 +5,31 @@ metadata:
   labels:
     app: mysql-backup
 spec:
-  schedule: '0 0 * * *'
+  schedule: '*/30 * * * *'
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 1
   jobTemplate:
     spec:
       template:
+        metadata:
+          annotations:
+            sidecar.istio.io/inject: "false"
         spec:
           containers:
             - name: mysql-backup-azure
-              image: adamhancock/mysql-backup-to-azure:develop
+              image: mysql-to-azure-backup
+              imagePullPolicy: IfNotPresent
               env:
                 - name: mysql_host
                   valueFrom:
                     secretKeyRef:
                       name: mysql-backup
                       key: host
+                - name: mysql_port
+                  valueFrom:
+                    secretKeyRef:
+                      name: mysql-backup
+                      key: port
                 - name: mysql_user
                   valueFrom:
                     secretKeyRef:
@@ -61,6 +70,10 @@ spec:
                     secretKeyRef:
                       name: azure
                       key: container
-
+                - name: azure_backupfileprefix
+                  valueFrom:
+                    secretKeyRef:
+                      name: azure
+                      key: backupfilePrefix
           restartPolicy: Never
-      backoffLimit: 4
+      backoffLimit: 1
